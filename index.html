@@ -1,599 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-    />
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emmanuel Opoku - Developer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css" />
     <title>eMann</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.7/swiper-bundle.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  </head>
-  <body>
-    <nav
-      class="navbar"
-      aria-label="Main navigation"
-      itemscope
-      itemtype="https://schema.org/SiteNavigationElement"
-      style="z-index: 1000"
-    >
-      <div style="display: flex; align-items: center">
-        <div class="icon">
-          <i class="fa-solid fa-code" style="color: var(--white);"></i>
-        </div>
-        <!--<h1 class="site-title" itemprop="name">eMann😉</h1>-->
-      </div>
+</head>
 
-      <ul id="nav-list">
-        <li itemprop="name">
-          <a href="#" class="active" itemprop="url">Home</a>
-        </li>
-        <li itemprop="name"><a href="#intro" itemprop="url">Intro</a></li>
-        <li itemprop="name"><a href="#service" itemprop="url">Services</a></li>
-        <li itemprop="name"><a href="#client" itemprop="url">Clients</a></li>
-        <li itemprop="name">
-          <a href="#" class="email" itemprop="url">Hire Me</a>
-        </li>
-      </ul>
-      <button
-        class="menu-icon"
-        aria-expanded="false"
-        aria-controls="nav-list"
-        aria-label="Toggle menu"
-      >
-        <i class="fas fa-bars"></i>
-      </button>
-      <button
-        class="close-icon"
-        aria-expanded="false"
-        aria-controls="nav-list"
-        aria-label="Close menu"
-      >
-        <i class="fas fa-times"></i>
-      </button>
-    </nav>
+<body>
+    <!-- Matrix Rain Easter Egg -->
+    <canvas class="matrix-rain" id="matrixCanvas"></canvas>
 
-    
-    <section class="container">
-      <div class="container__grid">
-        <div class="container__content">
-          <h2>Hello I'm</h2>
-          <h1>Emmanuel Opoku</h1>
-          <p>
-            A focused student in Data Management and Analytics, passionate about turning raw data into insights that drive smart
-            decisions. I also enjoy backend development—building scalable systems that support powerful, data-driven solutions.
-          </p>
-        </div>
-        <div class="container__image">
-          <div></div>
-        </div>
-      </div>
-    </section>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="logo">~/Emmanuel Opoku</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#terminal">Terminal</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <section class="section__container intro__container" id="intro">
-      <div class="intro__image">
-        <img src="assets/intro.png" alt="intro" />
-      </div>
-      <div class="intro__content">
-        <p class="section__subheader">My Intro</p>
-        <h2 class="section__header">About Me</h2>
-        <p class="intro__description">
-          I'm Emmanuel Opoku, a dedicated IT student specializing in Data Management and Analytics. With hands-on experience in
-          backend development using PHP, MySQL, and Laravel, I build efficient, scalable systems that support data-driven
-          solutions. I’m passionate about transforming raw data into actionable insights and developing tools that make technology
-          more impactful.
-        </p>
-        <div class="intro__grid">
-          <h5>
-            <span><i class="ri-user-line"></i></span> Name
-          </h5>
-          <span>:</span>
-          <p>Emmanuel Opoku</p>
-          <h5>
-            <span><i class="ri-phone-line"></i></span> Phone
-          </h5>
-          <span>:</span>
-          <p>+233 50 646 587</p>
-          <h5>
-            <span><i class="ri-mail-line"></i></span> Email
-          </h5>
-          <span>:</span>
-          <p>papa16annan@gmail.com</p>
-        </div>
-        <h4>My Interests</h4>
-        <div class="intro__flex">
-          <div>
-            <span><i class="ri-film-line"></i></span> Anime
-          </div>
-          <div>
-            <span><i class="ri-film-line"></i></span> Cartoons
-          </div>
-          <div>
-            <span><i class="ri-film-line"></i></span> Movies
-          </div>
-          <div>
-            <span><i class="ri-headphone-line"></i></span> Music
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="choose">
-      <div class="section__container choose__container">
-        <p class="section__subheader">Why Choose Me</p>
-        <h2 class="section__header">My Experties Area</h2>
-        <div class="choose__grid">
-          <canvas id="skillsRadarChart" width="200" height="200"></canvas>
-        </div>
-      </div>
-    </section>
-
-    <section class="section__container journey__container">
-      <p class="section__subheader">My Qualifications</p>
-      <h2 class="section__header">Awesome Journey</h2>
-      <div class="journey__grid">
-        <div>
-          <div class="journey__grid__header">
-            <span><i class="ri-graduation-cap-line"></i></span> Education
-          </div>
-          <div class="journey__card">
-            <span><i class="ri-circle-fill"></i></span>
-            <div>
-              <h4>West African Senior Secondary Certificate Examination</h4>
-              <h5>General Science</h5>
-              <p>
-                <span><i class="ri-calendar-fill"></i></span> 2016-2019
-              </p>
-            </div>
-          </div>
-          <div class="journey__card">
-            <span><i class="ri-circle-fill"></i></span>
-            <div>
-              <h4>BTech Information Technology</h4>
-              <h5>Data Management & Analytics</h5>
-              <p>
-                <span><i class="ri-calendar-fill"></i></span> 2022-present
-              </p>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div class="journey__grid__header">
-            <span><i class="ri-briefcase-line"></i></span> Experience
-          </div>
-          <div class="journey__card">
-            <span><i class="ri-circle-fill"></i></span>
-            <div>
-              <h4>Ghana Ports & Harbours Authority</h4>
-              <h5>Intern</h5>
-              <p>
-                <span><i class="ri-calendar-fill"></i></span> Aug 2023 - Nov 2023
-              </p>
-            </div>
-          </div>
-          <div class="journey__card">
-            <span><i class="ri-circle-fill"></i></span>
-            <div>
-              <h4>Sekondi-Takoradi Chamber of Commerce & Industry</h4>
-              <h5>Intern</h5>
-              <p>
-                <span><i class="ri-calendar-fill"></i></span> Aug 2024 - Oct2024
-              </p>
-            </div>
-          </div>
-          <div class="journey__card">
-            <span><i class="ri-circle-fill"></i></span>
-            <div>
-              <h4>Sekondi-Takoradi Chamber of Commerce & Industry</h4>
-              <h5>Intern</h5>
-              <p>
-                <span><i class="ri-calendar-fill"></i></span> Apr 2021 - present
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section__container skill__container" id="service">
-      <div class="skill__content">
-        <p class="section__subheader">My Skills</p>
-        <h2 class="section__header">
-          Why Hire Me For Your Next <span>Project?</span>
-        </h2>
-        <p class="section__description">
-          I bring a results-driven mindset, technical versatility, and real-world project experience to every challenge I take on—whether it's building scalable systems, managing data efficiently, or supporting digital transformation.
-        </p>
-      </div>
-      <div class="skill__grid">
-        <div class="skill__card">
-          <span><i class="ri-database-2-line"></i></span>
-          <h4>Data Management</h4>
-          <p>
-            Skilled in handling, structuring, and analyzing data to deliver clear, actionable insights that drive smart decision-making.
-          </p>
-        </div>
-        <div class="skill__card">
-          <span><i class="ri-code-s-slash-line"></i></span>
-          <h4>Backend Development</h4>
-          <p>
-            Building secure, efficient, and scalable backend systems using PHP, Laravel, and MySQL to support seamless application performance.
-          </p>
-        </div>
-        <div class="skill__card">
-          <span><i class="ri-tools-line"></i></span>
-          <h4>IT Support & Networking</h4>
-          <p>
-            Experienced in network setup, system troubleshooting, and tech support from hands-on roles during internships and fieldwork.
-          </p>
-        </div>
-      </div>
-    </section>
-
-
-    <section class="portfolio" id="portfolio">
-      <div class="section__container portfolio__container">
-        <p class="section__subheader">My Portfolio</p>
-        <h2 class="section__header">Recent Works</h2>
-        <div class="portfolio__nav">
-          <button class="btn mixitup-control-active" data-filter="all">
-            All
-          </button>
-          <button class="btn" data-filter=".web">Web Apps</button>
-          <button class="btn" data-filter=".game">Games</button>
-          <button class="btn" data-filter=".design">Designs</button>
-        </div>
-        <div class="portfolio__grid">
-          <div class="portfolio__card mix web">
-            <img src="assets/tkb.png" alt="project" />
-          </div>
-          <div class="portfolio__card mix web game">
-            <img src="assets/tsa.png" alt="project" />
-          </div>
-          <div class="portfolio__card mix design">
-            <img src="assets/duchess.png" alt="project" />
-          </div>
-          <div class="portfolio__card mix design web">
-            <img src="assets/brightstart.png" alt="project" />
-          </div>
-          <div class="portfolio__card mix design game">
-            <img src="assets/project-5.jpg" alt="project" />
-          </div>
-          <div class="portfolio__card mix design">
-            <img src="assets/project-6.jpg" alt="project" />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="banner__container">
-      <div class="banner__content">
-        <h2 class="section__header">Have A Project On Your Mind</h2>
-        <p>
-          Whether it's enhancing your brand's digital presence or launching a
-          targeted marketing campaign, I'm here to help you achieve your goals.
-          Let's collaborate!
-        </p>
-        <div class="banner__btn">
-          <button class="btn">Contact Me</button>
-        </div>
-      </div>
-      <div class="banner__image">
-        <img src="assets/together.png" alt="banner" />
-      </div>
-    </section>
-    <!-- Testimonials Section -->
-    <section class="section testimonials-section" id="client">
+    <!-- Hero Section -->
+    <section class="hero" id="home">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Testimonials</h2>
-                <p class="section-subtitle">What my clients say about working together</p>
+            <h1>Emmanuel Opoku</h1>
+            <p>Backend Web-Developer | Data Analyst | Problem Solver | Student | Anime Enthusiast</p>
+            <div class="cta-buttons">
+                <a href="#terminal" class="btn btn-primary">$ explore --interactive</a>
+                <a href="#contact" class="btn btn-secondary">$ contact --hire</a>
             </div>
+        </div>
+    </section>
 
-            <div class="swiper testimonials-swiper">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="testimonial-card">
-                            <div class="rating">
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                            </div>
-                            <p class="testimonial-text">
-                                "Working with eMann was an absolute game-changer for our business. The attention to detail and creative solutions exceeded all our expectations."
-                            </p>
-                            <div class="client-info">
-                                <div class="client-avatar">SJ</div>
-                                <div class="client-details">
-                                    <h4>Mr. Benjamin Nii Kpani Addy</h4>
-                                    <p>Deputy CEO STCCI</p>
-                                </div>
-                            </div>
-                        </div>
+    <!-- Terminal Section -->
+    <section class="terminal-section" id="terminal">
+        <div class="container">
+            <div class="terminal">
+                <div class="terminal-header">
+                    <div class="terminal-buttons">
+                        <div class="terminal-button"></div>
+                        <div class="terminal-button"></div>
+                        <div class="terminal-button"></div>
                     </div>
-
-                    <div class="swiper-slide">
-                        <div class="testimonial-card">
-                            <div class="rating">
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                            </div>
-                            <p class="testimonial-text">
-                                "Professional, reliable, and incredibly talented. eMann delivered exactly what we needed on time and within budget."
-                            </p>
-                            <div class="client-info">
-                                <div class="client-avatar">MC</div>
-                                <div class="client-details">
-                                    <h4>Daniel Agyekum Boateng</h4>
-                                    <p>Founder NSB Consult</p>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="terminal-title">eMann@portfolio:~$</div>
+                </div>
+                <div class="terminal-body" id="terminalBody">
+                    <div class="terminal-line">
+                        <span class="prompt">eMann@portfolio:~$</span> <span class="command">whoami</span>
                     </div>
-
-                    <div class="swiper-slide">
-                        <div class="testimonial-card">
-                            <div class="rating">
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                            </div>
-                            <p class="testimonial-text">
-                                "From concept to completion, the entire process was smooth and collaborative. eMann's expertise and communication skills are outstanding."
-                            </p>
-                            <div class="client-info">
-                                <div class="client-avatar">ER</div>
-                                <div class="client-details">
-                                    <h4>Emmanuel Wobil</h4>
-                                    <p>Founder of TravelWithKB</p>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="terminal-line">
+                        <div class="output">Developer with 3+ years of experience crafting digital solutions</div>
                     </div>
-
-                    <div class="swiper-slide">
-                        <div class="testimonial-card">
-                            <div class="rating">
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                            </div>
-                            <p class="testimonial-text">
-                                "The quality of work was exceptional. eMann understood our vision perfectly and brought it to life better than we imagined."
-                            </p>
-                            <div class="client-info">
-                                <div class="client-avatar">DW</div>
-                                <div class="client-details">
-                                    <h4>David Wilson</h4>
-                                    <p>Marketing Manager, Innovation Co.</p>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="terminal-line">
+                        <span class="prompt">eMann@portfolio:~$</span> <span class="command">ls -la skills/</span>
                     </div>
-
-                    <div class="swiper-slide">
-                        <div class="testimonial-card">
-                            <div class="rating">
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                            </div>
-                            <p class="testimonial-text">
-                                "Fast turnaround, excellent communication, and results that speak for themselves. Couldn't be happier with the outcome."
-                            </p>
-                            <div class="client-info">
-                                <div class="client-avatar">LT</div>
-                                <div class="client-details">
-                                    <h4>Lisa Thompson</h4>
-                                    <p>Product Owner, Digital Solutions</p>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="terminal-line">
+                        <div class="output">PHP • MySQL • PDO • AJAX • JavaScript • HTML • CSS • SQL • Python • Pandas •
+                            NumPy • Matplotlib • Excel • Power BI • Statistics • Probability</div>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="prompt">eMann@portfolio:~$</span> <span class="command">cat README.md</span>
+                    </div>
+                    <div class="terminal-line">
+                        <div class="output">Welcome to my interactive portfolio! Try these commands:</div>
+                        <div class="output">• help - Show available commands</div>
+                        <div class="output">• projects - View my latest work</div>
+                        <div class="output">• about - Learn more about me</div>
+                        <div class="output">• resume - Download my resume</div>
+                        <div class="output">• contact - Get in touch</div>
+                        <div class="output">• blog - Read my thoughts</div>
+                        <div class="output">• social - Find me online</div>
+                    </div>
+                    <div class="terminal-input">
+                        <span class="prompt">eMann@portfolio:~$</span>
+                        <input type="text" id="terminalInput" placeholder="Type a command...">
+                        <span class="cursor"></span>
                     </div>
                 </div>
-                
-                <div class="swiper-pagination"></div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
             </div>
         </div>
     </section>
 
-    <footer class="footer">
-      <div class="footer__container">
-        <div class="footer__content">
-          <!-- About/Logo Section -->
-          <div class="footer__section">
-            <div class="footer__logo">
-              <!-- Replace with your logo image -->
-               <style>
-                .icon {
-                  margin-right: 5rem;
-                  width: 36px;
-                  height: 36px;
-                  border-radius: 50%;
-                  background: linear-gradient(135deg, var(--primary), var(--secondary));
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  transition: all 0.3s ease;
-                  box-shadow: 0 2px 8px rgba(108, 155, 207, 0.2);
-                  will-change: transform;
-                }
-               </style>
-              <div class="icon">
-                <i class="fa-solid fa-code" style="color: var(--white);"></i>
-              </div>
+    <!-- Content Sections -->
+    <section class="content-section" id="projects-section">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card" onclick="window.open('https://stccijubileebrightstart.org', '_blank')">
+                    <h3 class="project-title">Learning Management System</h3>
+                    <p class="project-description">Full-stack learning management system with dynamic course management,
+                        interactive quizzes with auto grading, learner activity tracking and real-time communication
+                        between learners and tutors.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">PHP</span>
+                        <span class="tech-tag">MySQL</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">AJAX</span>
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                    </div>
+                </div>
+                <div class="project-card" onclick="window.open('https://jubileetertiaryscholarsaid.org/', '_blank')">
+                    <h3 class="project-title">Scholarship Application Web App</h3>
+                    <p class="project-description">A secure web application for managing multi‑section scholarship
+                        applications, document uploads, and real‑time status tracking for applicants and admins.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">PHP</span>
+                        <span class="tech-tag">MySQL</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">AJAX</span>
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                    </div>
+                </div>
+                <div class="project-card" onclick="window.open('https://duchessautocare.com/', '_blank')">
+                    <h3 class="project-title">E-Commerce platform</h3>
+                    <p class="project-description">An e‑commerce platform featuring real‑time inventory management,
+                        customer checkout, order history, and an admin dashboard for product management.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">PHP</span>
+                        <span class="tech-tag">MySQL</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">AJAX</span>
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                    </div>
+                </div>
             </div>
-            <p class="footer__about">
-              I'm a passionate developer creating elegant solutions to complex
-              problems. Let's collaborate and bring your ideas to life.
-            </p>
-            <div class="footer__social">
-              <a href="www.linkedin.com/in/emmanuel-opoku-a45820198" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-              <a href="https://github.com/eMann2o" aria-label="GitHub"><i class="fab fa-github"></i></a>
-              <a href="https://x.com/emman2o" aria-label="Twitter"><i class="ri-twitter-x-line"></i></i></a>
-              <a href="https://www.instagram.com/the_e.m.a.n.n/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-              <a href="https://www.tiktok.com/@emann2.o" aria-label="Tik-Tok"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
+    </section>
+
+    <section class="content-section" id="about-section">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div>
+                    <img src="assets/me.JPEG" alt="Emmanuel Opoku" class="profile-image">
+                </div>
+                <div>
+                    <p>
+                        I’m an aspiring data analyst and backend web developer with a foundation in Python, SQL, and statistical analysis,
+                        alongside strong experience in PHP, MySQL, and AJAX for building secure and scalable web applications.
+                        My background includes designing relational databases, cleaning and transforming data, and presenting insights
+                        using tools like Excel, Power BI, and Matplotlib, as well as developing dynamic platforms such as e-commerce sites,
+                        learning management systems, and scholarship application portals.
+                    </p>
+                    <p>
+                        When I’m not building backend systems or analyzing data, I’m usually playing basketball, discovering new music,
+                        or watching anime to unwind and recharge my creativity.
+                    </p>
+                </div>
             </div>
-          </div>
-
-          <!-- Quick Links Section -->
-          <div class="footer__section">
-            <h3 class="footer__title">Quick Links</h3>
-            <ul class="footer__links">
-              <li>
-                <a href="#home"><i class="fas fa-home"></i> Home</a>
-              </li>
-              <li>
-                <a href="#intro"><i class="fas fa-user"></i> Intro</a>
-              </li>
-              <li>
-                <a href="#service"><i class="fas fa-cogs"></i> Services</a>
-              </li>
-              <li>
-                <a href="#client"><i class="fas fa-handshake"></i> Clients</a>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Contact Section -->
-          <div class="footer__section">
-            <h3 class="footer__title">Contact Info</h3>
-            <p class="footer__text">
-              <i class="fas fa-envelope"></i> <a href="mailto:papa16annan@gmail.com" class="footer__contact-link">papa16annan@gmail.com</a>
-            </p>
-            <p class="footer__text">
-              <i class="fas fa-phone"></i> <a href="tel:+233506466587" class="footer__contact-link">+233(0) 506 466 587</a>
-            </p>
-            <p class="footer__text">
-              <i class="fas fa-map-marker-alt"></i> Takoradi, Ghana
-            </p>
-          </div>
         </div>
+    </section>
 
-        <!-- Footer Bottom -->
-        <div class="footer__bottom">
-          <p class="footer__copyright">
-            &copy; 2025 Your Name. All rights reserved.
-          </p>
-
-          <p class="footer__credit">Designed with <span>❤</span> by eMann😉</p>
+    <section class="content-section" id="contact-section">
+        <div class="container">
+            <h2 class="section-title">Let's Work Together</h2>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
         </div>
-      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="footer__container">
+            <div class="footer__content">
+                <!-- About/Logo Section -->
+                <div class="footer__section">
+                    <div class="footer__logo">
+                        <!-- Replace with your logo image -->
+                        <style>
+                            .icon {
+                                margin-right: 5rem;
+                                width: 36px;
+                                height: 36px;
+                                border-radius: 50%;
+                                background: linear-gradient(135deg, var(--primary), var(--secondary));
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                transition: all 0.3s ease;
+                                box-shadow: 0 2px 8px rgba(108, 155, 207, 0.2);
+                                will-change: transform;
+                            }
+                        </style>
+                        <div class="icon">
+                            <i class="fa-solid fa-code" style="color: var(--white);"></i>
+                        </div>
+                    </div>
+                    <p class="footer__about">
+                        I'm a passionate developer creating elegant solutions to complex
+                        problems. Let'scollaborate and bring your ideas to life.
+                    </p>
+                    <div class="footer__social">
+                        <a href="www.linkedin.com/in/emmanuel-opoku-a45820198" aria-label="LinkedIn"><i
+                                class="fab fa-linkedin-in"></i></a>
+                        <a href="https://github.com/eMann2o" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://x.com/emman2o" aria-label="Twitter"><i class="ri-twitter-x-line"></i></i></a>
+                        <a href="https://www.instagram.com/the_e.m.a.n.n/" aria-label="Instagram"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@emann2.o" aria-label="Tik-Tok"><i
+                                class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
+
+                <!-- Contact Section -->
+                <div class="footer__section">
+                    <h3 class="footer__title">Contact Info</h3>
+                    <p class="footer__text">
+                        <i class="fas fa-envelope"></i> <a href="mailto:papa16annan@gmail.com"
+                            class="footer__contact-link">papa16annan@gmail.com</a>
+                    </p>
+                    <p class="footer__text">
+                        <i class="fas fa-map-marker-alt"></i> Takoradi, Ghana
+                    </p>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer__bottom">
+                <p class="footer__copyright">
+                    &copy; 2025 Emmanuel Opoku. All rights reserved.
+                </p>
+
+                <p class="footer__credit">Designed with by eMann😉</p>
+            </div>
+        </div>
     </footer>
-
-    <script src="https://unpkg.com/scrollreveal"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="main.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.7/swiper-bundle.min.js"></script>
-    <script>
-      let swiper;
-      swiper = new Swiper('.testimonials-swiper', {
-        slidesPerView: 1,
-        spaceBetween: 20,
-        loop: true,
-        autoplay: {
-          delay: 5000,
-          disableOnInteraction: false,
-        },
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-        },
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        },
-        breakpoints: {
-          640: {
-            slidesPerView: 1,
-            spaceBetween: 20,
-          },
-          768: {
-            slidesPerView: 2,
-            spaceBetween: 30,
-          },
-          1024: {
-            slidesPerView: 3,
-            spaceBetween: 30,
-          },
-        },
-      });
+</body>
 
-      const data = {
-        labels: [
-          'Data Management',
-          'Backend Development',
-          'Frontend Development',
-          'Laravel',
-          'SQL & DB Design',
-          'JavaScript & AJAX',
-          'Statistics & Probability',
-        ],
-        datasets: [{
-          label: 'My Skill Proficiency (%)',
-          data: [75, 80, 70, 60, 75, 65, 65],
-          fill: true,
-          backgroundColor: [
-            'rgba(255, 0, 0, 1)',
-            'rgb(0, 32, 255)',
-            'rgb(96, 255, 0, 1)',
-            'rgb(255, 131, 0, 1)',
-            'rgb(0, 239, 255, 1)',
-            'rgb(255, 226, 0, 1)',
-            'rgb(185, 0, 255, 1)'
-          ],
-          borderColor: 'rgb(54, 162, 235)',
-          pointBackgroundColor: 'rgb(54, 162, 235)',
-          pointBorderColor: '#fff',
-          pointHoverBackgroundColor: '#fff',
-          pointHoverBorderColor: 'rgb(54, 162, 235)'
-        }]
-      };
-
-      const config = {
-        type: 'polarArea',
-        data: data,
-        options: {
-          responsive: true,
-          plugins: {
-            title: {
-              display: true,
-              text: 'My Tech Skill Radar'
-            }
-          },
-          scales: {
-            r: {
-              suggestedMin: 0,
-              suggestedMax: 100
-            }
-          }
-        }
-      };
-
-      new Chart(document.getElementById('skillsRadarChart'), config);
-
-    </script>
-  </body>
 </html>
