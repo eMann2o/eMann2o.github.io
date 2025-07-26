@@ -30,7 +30,25 @@ Pro Tip: Try the Konami Code for a surprise! 🎮
 Ready for commands...`,
 
     help: () => `Available commands:
-• help - Show this help message
+• help - Show help message
+• whoami - Get info about me
+• about - Learn more about me
+• projects - View my latest work
+• resume - Download my resume
+• contact - Get in touch
+• social - Find me online
+• ls_la_skills - See my skillset
+• clear - Clear terminal
+• joke - Tell a programming joke
+• skills - Show technical skills
+• fortune - Get a developer fortune
+• history - Show command history`,
+
+    ls_skills: () =>'PHP • MySQL • PDO • AJAX • JavaScript • HTML • CSS • SQL • Python • Pandas • NumPy • Matplotlib • Excel • Power BI • Statistics • Probability',
+
+    whoami: () => `Developer with 3+ years of experience crafting digital solutions
+• help - Show help message
+• whoami - Get info about me
 • about - Learn more about me
 • projects - View my latest work
 • resume - Download my resume

@@ -10,12 +10,68 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css" />
-    <title>eMann</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.7/swiper-bundle.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
+    <!-- Primary Meta Tags -->
+    <title>Emmanuel Opoku | Backend Web Developer | PHP, MySQL, Python</title>
+    <meta name="title" content="Emmanuel Opoku | Backend Web Developer | PHP, MySQL, Power BI">
+    <meta name="description" content="Emmanuel Opoku is a backend web developer who builds scalable, clean web applications using PHP, MySQL, and Power BI. Helping startups, recruiters, and businesses craft functional solutions.">
+
+    <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://emann2o.github.io/" />
+    <meta property="og:title" content="Emmanuel Opoku | Backend Web Developer" />
+    <meta property="og:description" content="PHP, MySQL, Python & Power BI specialist building clean, scalable web apps for startups and businesses." />
+    <meta property="og:image" content="https://emann2o.github.io/assets/opengraph.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_GB" />
+
+    <!-- Twitter (X) -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://emann2o.github.io/" />
+    <meta name="twitter:title" content="Emmanuel Opoku | Backend Web Developer" />
+    <meta name="twitter:description" content="Backend web developer specializing in PHP, MySQL, Python, Power BI. Clean, scalable solutions for startups, recruiters, and businesses." />
+    <meta name="twitter:image" content="https://emann2o.github.io/assets/opengraph.png" />
+
+    <!-- Schema.org JSON-LD for Google Rich Results -->
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Emmanuel Opoku",
+    "jobTitle": "Backend Web Developer",
+    "url": "https://emann2o.github.io/",
+    "sameAs": [
+        "https://github.com/eMann2o",
+        "https://www.linkedin.com/in/emmanuel-opoku-a45820198",
+        "https://twitter.com/emman2o"
+    ],
+    "knowsAbout": ["PHP", "MySQL", "Power BI", "Laravel", "Backend Development", "Data Visualization"],
+    "description": "Emmanuel Opoku is a backend web developer specializing in PHP, Laravel, MySQL, and data visualization with Power BI. He builds scalable, high-performance applications for startups, recruiters, and businesses."
+    }
+    </script>
+
 </head>
 
 <body>
+    <script>
+        function toggleTheme() {
+            const root = document.documentElement;
+            const themeToggle = document.querySelector('.theme-toggle');
+            
+            if (root.classList.contains('light-mode')) {
+                root.classList.remove('light-mode');
+                themeToggle.innerHTML = '<span class="material-symbols-rounded  icon">light_mode</span>';
+            } else {
+                root.classList.add('light-mode');
+                themeToggle.innerHTML = '<span class="material-symbols-outlined">dark_mode</span>';
+            }
+        }
+    </script>
     <!-- Matrix Rain Easter Egg -->
     <canvas class="matrix-rain" id="matrixCanvas"></canvas>
 
@@ -28,6 +84,7 @@
                 <li><a href="#terminal">Terminal</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <!--<li><button class="theme-toggle" onclick="toggleTheme()"><span class="material-symbols-rounded  icon">light_mode</span></button></li>-->
             </ul>
         </nav>
     </header>
@@ -43,9 +100,9 @@
             </div>
         </div>
     </section>
-
+    <div class="culer" id="terminal"></div>
     <!-- Terminal Section -->
-    <section class="terminal-section" id="terminal">
+    <section class="terminal-section">
         <div class="container">
             <div class="terminal">
                 <div class="terminal-header">
@@ -58,30 +115,9 @@
                 </div>
                 <div class="terminal-body" id="terminalBody">
                     <div class="terminal-line">
-                        <span class="prompt">eMann@portfolio:~$</span> <span class="command">whoami</span>
                     </div>
                     <div class="terminal-line">
-                        <div class="output">Developer with 3+ years of experience crafting digital solutions</div>
-                    </div>
-                    <div class="terminal-line">
-                        <span class="prompt">eMann@portfolio:~$</span> <span class="command">ls -la skills/</span>
-                    </div>
-                    <div class="terminal-line">
-                        <div class="output">PHP • MySQL • PDO • AJAX • JavaScript • HTML • CSS • SQL • Python • Pandas •
-                            NumPy • Matplotlib • Excel • Power BI • Statistics • Probability</div>
-                    </div>
-                    <div class="terminal-line">
-                        <span class="prompt">eMann@portfolio:~$</span> <span class="command">cat README.md</span>
-                    </div>
-                    <div class="terminal-line">
-                        <div class="output">Welcome to my interactive portfolio! Try these commands:</div>
-                        <div class="output">• help - Show available commands</div>
-                        <div class="output">• projects - View my latest work</div>
-                        <div class="output">• about - Learn more about me</div>
-                        <div class="output">• resume - Download my resume</div>
-                        <div class="output">• contact - Get in touch</div>
-                        <div class="output">• blog - Read my thoughts</div>
-                        <div class="output">• social - Find me online</div>
+                        <div class="output"></div>
                     </div>
                     <div class="terminal-input">
                         <span class="prompt">eMann@portfolio:~$</span>

@@ -1,3 +1,33 @@
+/*------------------------------LIGHT MODE-----------------------------*/
+/* Light Mode Colors and Shadows */
+:root.light-mode {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #e9ecef;
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --accent-green: #28a745;
+  --accent-pink: #e83e8c;
+  --accent-cyan: #17a2b8;
+  --accent-yellow: #ffc107;
+  --accent-purple: #6f42c1;
+  --border-color: #dee2e6;
+  --glow: 0 0 5px;
+}
+
+/* Light mode shadow adjustments */
+:root.light-mode .terminal {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+:root.light-mode .project-card:hover {
+  box-shadow: 0 10px 30px rgba(111, 66, 193, 0.1);
+}
+
+.culer{
+  padding-top: 60rem;
+}
+
 /*----------------------MAIN STYLE-----------------*/
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap');
         
