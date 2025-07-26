@@ -180,7 +180,6 @@ const easterEggs = {
     'hack': () => '👨‍💻 Hacking in progress... Just kidding! Ethical coding only here. 🛡️',
     'konami': () => '🎮 ↑ ↑ ↓ ↓ ← → ← → B A START! You know the code! 🕹️',
     'secret': () => '🤫 You found a secret! Here\'s a virtual cookie: 🍪 (Zero calories!)',
-    'ping google.com': () => commands.ping('google.com'),
     'exit': () => '🚪 There is no escape from the terminal! Welcome to the Matrix... forever! 😈',
     'vim': () => '⚠️ Vim disabled for your safety. Use VS Code like the rest of us! 😄 (Just kidding, vim lovers!)',
     'emacs': () => '🤝 Editor wars are so last decade! Use whatever makes you productive! ✌️',
@@ -202,6 +201,27 @@ const easterEggs = {
     'coffee++': () => '☕ Incrementing coffee levels... Developer productivity increased by 127%!',
     'sleep': () => '😴 Sleep is for those who don\'t have one more bug to fix... Just one more...',
     'debugging': () => '🔍 99% of debugging is fixing the bug you created while fixing the previous bug.',
+    ping: (host = 'google.com') => {
+        if (!host) host = 'google.com';
+
+        // Simulate ping times
+        const times = Array.from({ length: 4 }, () => Math.floor(Math.random() * 100) + 10);
+
+        let output = `Pinging ${host} with 32 bytes of data:\n`;
+        times.forEach(time => {
+            output += `Reply from ${host}: bytes=32 time=${time}ms TTL=128\n`;
+        });
+
+        const avg = Math.round(times.reduce((a, b) => a + b, 0) / times.length);
+
+        output += `\nPing statistics for ${host}:
+        Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+    Approximate round trip times in milli-seconds:
+        Minimum = ${Math.min(...times)}ms, Maximum = ${Math.max(...times)}ms, Average = ${avg}ms`;
+
+        return output;
+    },
+
     'matrix': () => {toggleMatrix(); return 'Matrix rain activated! Type "matrix" again to toggle off.';
 },
 
@@ -1158,28 +1178,43 @@ function setupSoundEffects() {
 }
 
 // Initialize everything when page loads
-document.addEventListener('DOMContentLoaded', function() {
-    // Core functionality
-    setupTerminalInput();
-    initMatrix();
-    setupProjectCards();
-    setupContactForm();
-    setupKonamiCode();
-    setupGlitchEffect();
-    setupAccessibility();
-    setupThemeSwitcher();
-    setupSoundEffects();
-    
-    // Performance monitoring in development
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        initPerformanceMonitoring();
-    }
-    
-    // Welcome message with delay
+// Delay all initialization and animations by 10 seconds
+window.addEventListener('load', () => {
     setTimeout(() => {
-        addTerminalLine(
-            'system_init',
-            `🚀 Welcome to Emmanuel Opoku's Interactive Portfolio Terminal!
+        // Fade in page
+        document.body.style.opacity = '0';
+        document.body.style.transition = 'opacity 0.8s ease';
+
+        setTimeout(() => {
+            document.body.style.opacity = '1';
+
+            // Initialize particle effects after fade-in
+            setTimeout(() => {
+                createParticles();
+            }, 500);
+        }, 100);
+
+        // Initialize core features after delay
+        setupTerminalInput();
+        initMatrix();
+        setupProjectCards();
+        setupContactForm();
+        setupKonamiCode();
+        setupGlitchEffect();
+        setupAccessibility();
+        setupThemeSwitcher();
+        setupSoundEffects();
+
+        // Development performance monitoring
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            initPerformanceMonitoring();
+        }
+
+        // Show terminal welcome message after initialization
+        setTimeout(() => {
+            addTerminalLine(
+                'system_init',
+                `🚀 Welcome to Emmanuel Opoku's Interactive Portfolio Terminal!
 
 System Status: ✅ All systems operational
 Terminal Version: 2.0.0
@@ -1196,48 +1231,252 @@ Easter Eggs: Hidden throughout - explore and discover! 🥚
 Pro Tip: Try the Konami Code for a surprise! 🎮
 
 Ready for commands...`
-        );
-    }, 800);
-    
-    // Typing animation for hero text
-    setTimeout(() => {
-        const heroSubtitle = document.querySelector('.hero p');
-        if (heroSubtitle) {
-            const originalText = heroSubtitle.textContent;
-            typeWriter(heroSubtitle, originalText, 30);
-        }
-    }, 1500);
-});
+            );
+        }, 800);
 
-// Page load animations
-window.addEventListener('load', () => {
-    // Fade in animation
-    document.body.style.opacity = '0';
-    document.body.style.transition = 'opacity 0.8s ease';
-    
-    setTimeout(() => {
-        document.body.style.opacity = '1';
-        
-        // Initialize visual effects after page is visible
+        // Hero text typing animation
         setTimeout(() => {
-            createParticles();
-        }, 500);
-    }, 100);
+            const heroSubtitle = document.querySelector('.hero p');
+            if (heroSubtitle) {
+                const originalText = heroSubtitle.textContent;
+                typeWriter(heroSubtitle, originalText, 30);
+            }
+        }, 1500);
+
+    }, 10000); // 10-second delay
 });
 
-// Cleanup on page unload
-window.addEventListener('beforeunload', () => {
-    if (particleSystem && particleSystem.canvas) {
-        particleSystem.canvas.remove();
+
+
+//---------------------------------CURSOR INTEGRATION---------------------------------------------
+// Terminal Cursor Integration - Add this to your existing JavaScript
+
+class TerminalCursor {
+    constructor(inputElement, cursorElement, promptElement) {
+        this.input = inputElement;
+        this.cursor = cursorElement;
+        this.prompt = promptElement;
+        this.isTyping = false;
+        this.typingTimeout = null;
+        this.promptWidth = this.getPromptWidth();
     }
-});
 
-// Export functions for potential external use
-window.portfolioTerminal = {
-    addCommand: (name, handler) => {
-        commands[name] = handler;
-    },
-    executeCommand: processCommand,
-    addOutput: addTerminalLine,
-    clearTerminal: commands.clear
-};
+    // Calculate the width of the prompt
+    getPromptWidth() {
+        if (!this.prompt) return 0;
+        
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        const computedStyle = getComputedStyle(this.prompt);
+        context.font = `${computedStyle.fontWeight} ${computedStyle.fontSize} ${computedStyle.fontFamily}`;
+        
+        return context.measureText(this.prompt.textContent + ' ').width;
+    }
+
+    // Method to show typing state
+    startTyping() {
+        this.isTyping = true;
+        this.cursor.classList.add('typing');
+        
+        // Clear any existing timeout
+        if (this.typingTimeout) {
+            clearTimeout(this.typingTimeout);
+        }
+        
+        // Stop typing state after 500ms of no activity
+        this.typingTimeout = setTimeout(() => {
+            this.stopTyping();
+        }, 500);
+    }
+
+    // Method to stop typing state
+    stopTyping() {
+        this.isTyping = false;
+        this.cursor.classList.remove('typing');
+    }
+
+    // Position cursor after prompt + typed text
+    updatePosition() {
+        const text = this.input.value;
+        const textWidth = this.getTextWidth(text);
+        const totalWidth = this.promptWidth + textWidth;
+        
+        this.cursor.style.left = totalWidth + 'px';
+    }
+
+    // Calculate text width in input
+    getTextWidth(text) {
+        if (!text) return 0;
+        
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        const computedStyle = getComputedStyle(this.input);
+        context.font = `${computedStyle.fontWeight} ${computedStyle.fontSize} ${computedStyle.fontFamily}`;
+        
+        return context.measureText(text).width;
+    }
+
+    // Set cursor state (error, success, etc.)
+    setState(state) {
+        this.cursor.className = 'cursor ' + state;
+    }
+
+    // Initialize cursor position
+    init() {
+        this.updatePosition();
+    }
+}
+
+// Initialize the terminal cursor system
+function initializeTerminalCursor() {
+    const terminalInput = document.querySelector('.terminal-input input');
+    const cursorElement = document.querySelector('.terminal-input .cursor');
+    const promptElement = document.querySelector('.terminal-input .prompt');
+    const terminal = document.querySelector('.terminal');
+    
+    if (terminalInput && cursorElement && promptElement) {
+        const cursor = new TerminalCursor(terminalInput, cursorElement, promptElement);
+        
+        // Initialize cursor position
+        cursor.init();
+        
+        // Handle typing events
+        terminalInput.addEventListener('input', () => {
+            if (document.activeElement === terminalInput) {
+                cursor.startTyping();
+                cursor.updatePosition();
+            }
+        });
+        
+        terminalInput.addEventListener('keydown', () => {
+            if (document.activeElement === terminalInput) {
+                cursor.startTyping();
+                // Update position on next frame to account for character changes
+                requestAnimationFrame(() => cursor.updatePosition());
+            }
+        });
+        
+        terminalInput.addEventListener('keyup', () => {
+            if (document.activeElement === terminalInput) {
+                cursor.updatePosition();
+            }
+        });
+        
+        // Handle focus states - show cursor
+        terminalInput.addEventListener('focus', () => {
+            terminal.classList.add('focused');
+            cursorElement.style.opacity = '1';
+            cursor.updatePosition();
+        });
+        
+        // Handle blur states - hide cursor
+        terminalInput.addEventListener('blur', () => {
+            terminal.classList.remove('focused');
+            cursor.stopTyping();
+            cursorElement.style.opacity = '0';
+        });
+        
+        // Handle command execution
+        terminalInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && document.activeElement === terminalInput) {
+                const command = terminalInput.value.trim();
+                
+                // Show success or error state based on command
+                if (command === 'clear' || command === 'help' || command.startsWith('echo')) {
+                    cursor.setState('success');
+                    setTimeout(() => cursor.setState(''), 1000);
+                } else if (command && !isValidCommand(command)) {
+                    cursor.setState('error');
+                    setTimeout(() => cursor.setState(''), 1500);
+                }
+                
+                // Reset cursor position after command
+                setTimeout(() => {
+                    cursor.updatePosition();
+                }, 100);
+            }
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            cursor.promptWidth = cursor.getPromptWidth();
+            cursor.updatePosition();
+        });
+        
+        return cursor;
+    }
+}
+
+// Helper function to check if command is valid
+function isValidCommand(command) {
+    const validCommands = ['help', 'clear', 'about', 'projects', 'contact', 'skills', 'whoami'];
+    const cmd = command.split(' ')[0];
+    return validCommands.includes(cmd) || command.startsWith('echo');
+}
+
+// Enhanced terminal typing effect with proper cursor
+function typeText(element, text, speed = 50) {
+    const cursor = element.querySelector('.cursor');
+    let i = 0;
+    
+    // Show typing state
+    if (cursor) cursor.classList.add('typing');
+    
+    function type() {
+        if (i < text.length) {
+            // Insert character before cursor
+            const beforeCursor = element.innerHTML.substring(0, element.innerHTML.indexOf('<span class="cursor'));
+            const afterCursor = element.innerHTML.substring(element.innerHTML.indexOf('</span>') + 7);
+            
+            element.innerHTML = beforeCursor + text.charAt(i) + 
+                              '<span class="cursor typing"></span>' + afterCursor;
+            i++;
+            setTimeout(type, speed);
+        } else {
+            // Stop typing state
+            if (cursor) cursor.classList.remove('typing');
+        }
+    }
+    
+    type();
+}
+
+// Update your existing terminal command handler
+function handleTerminalCommand(command) {
+    const terminal = document.querySelector('.terminal-body');
+    const cursor = document.querySelector('.cursor');
+    
+    // Add command to terminal
+    const commandLine = document.createElement('div');
+    commandLine.className = 'terminal-line';
+    commandLine.innerHTML = `<span class="prompt">user@portfolio:~$</span> <span class="command">${command}</span>`;
+    terminal.appendChild(commandLine);
+    
+    // Show typing state while processing
+    if (cursor) cursor.classList.add('typing');
+    
+    // Process command and show result
+    setTimeout(() => {
+        const output = processCommand(command);
+        const outputLine = document.createElement('div');
+        outputLine.className = 'terminal-line';
+        outputLine.innerHTML = `<span class="output">${output}</span>`;
+        terminal.appendChild(outputLine);
+        
+        // Update cursor state based on result
+        if (cursor) {
+            cursor.classList.remove('typing');
+            if (output.includes('Error') || output.includes('not found')) {
+                cursor.classList.add('error');
+                setTimeout(() => cursor.classList.remove('error'), 1500);
+            }
+        }
+        
+        terminal.scrollTop = terminal.scrollHeight;
+    }, 100);
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    initializeTerminalCursor();
+});

@@ -58,6 +58,53 @@
 </head>
 
 <body>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-terminal">
+            <div class="terminal-header">
+                <div class="terminal-dot"></div>
+                <div class="terminal-dot"></div>
+                <div class="terminal-dot"></div>
+                <div class="terminal-title">Terminal - Initializing Portfolio System</div>
+            </div>
+            
+            <div class="ascii-art">
+                <span class="ascii-line">███████╗███╗   ███╗ █████╗ ███╗   ██╗███╗   ██╗</span>
+                <span class="ascii-line">██╔════╝████╗ ████║██╔══██╗████╗  ██║████╗  ██║</span>
+                <span class="ascii-line">█████╗  ██╔████╔██║███████║██╔██╗ ██║██╔██╗ ██║</span>
+                <span class="ascii-line">██╔══╝  ██║╚██╔╝██║██╔══██║██║╚██╗██║██║╚██╗██║</span>
+                <span class="ascii-line">███████╗██║ ╚═╝ ██║██║  ██║██║ ╚████║██║ ╚████║</span>
+                <span class="ascii-line">╚══════╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═══╝</span>
+            </div>
+            
+            <div class="version-text">v.1.0</div>
+
+            <div class="loading-content">
+                <div class="loading-text">
+                    <span class="prompt">system@loader:~$</span> 
+                    <span class="command">init emann_portfolio</span>
+                </div>
+                <div class="loading-text">
+                    <span class="output"><span class="loading-spinner"></span>Loading core systems...</span>
+                </div>
+                <div class="loading-text">
+                    <span class="success">✓ Terminal interface initialized</span>
+                </div>
+                <div class="loading-text">
+                    <span class="success">✓ Projects database connected</span>
+                </div>
+                <div class="loading-text">
+                    <span class="success">✓ Skills matrix loaded</span>
+                </div>
+                <div class="loading-text">
+                    <span class="success">✓ Portfolio v1.0 ready for deployment</span>
+                </div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+    </div>
     <script>
         function toggleTheme() {
             const root = document.documentElement;
@@ -289,6 +336,46 @@
             </div>
         </div>
     </footer>
+    <script>
+        // Loading Screen Controller
+        function initLoadingScreen() {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            const body = document.body;
+            
+            // Prevent scrolling during loading
+            body.style.overflow = 'hidden';
+            
+            // Hide loading screen after 10 seconds
+            setTimeout(() => {
+                hideLoadingScreen();
+            }, 10000);
+            
+            // Optional: Allow skipping with click or keypress
+            loadingOverlay.addEventListener('click', hideLoadingScreen);
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ' || e.key === 'Escape') {
+                    hideLoadingScreen();
+                }
+            });
+            
+            function hideLoadingScreen() {
+                loadingOverlay.classList.add('hide');
+                body.style.overflow = 'auto';
+                
+                // Remove element after animation
+                setTimeout(() => {
+                    loadingOverlay.remove();
+                }, 1000);
+            }
+        }
+
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initLoadingScreen);
+        } else {
+            initLoadingScreen();
+        }
+    </script>
     <script src="main.js"></script>
 </body>
 

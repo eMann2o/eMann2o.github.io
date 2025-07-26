@@ -1,3 +1,197 @@
+/*--------------------------------------CURSOR----------------------------------------------------------------*/
+/* Enhanced Terminal Cursor Styles */
+.cursor {
+  display: inline-block;
+  background: var(--accent-green);
+  width: 10px; /* Made wider for block cursor */
+  height: 1.2em;
+  animation: blink 1s infinite;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  border-radius: 1px; /* Slight rounding for modern look */
+  opacity: 0; /* Hidden by default */
+  transition: opacity 0.2s ease;
+}
+
+/* Show cursor only when terminal input is focused */
+.terminal-input input:focus + .cursor,
+.terminal.focused .cursor {
+  opacity: 1;
+}
+
+/* Alternative: Underscore cursor style */
+.cursor.underscore {
+  width: 0.8em;
+  height: 2px;
+  background: var(--accent-green);
+  margin-left: 0;
+  margin-bottom: 2px;
+  vertical-align: baseline;
+  border-radius: 0;
+}
+
+/* Alternative: Pipe cursor style (classic terminal) */
+.cursor.pipe {
+  width: 2px;
+  height: 1.2em;
+  background: var(--accent-green);
+  margin-left: 1px;
+  vertical-align: text-bottom;
+  border-radius: 0;
+}
+
+/* Enhanced blinking animation - more realistic terminal timing */
+@keyframes blink {
+  0%, 49% { 
+    opacity: 1; 
+    box-shadow: 0 0 5px var(--accent-green);
+  }
+  50%, 100% { 
+    opacity: 0; 
+    box-shadow: none;
+  }
+}
+
+/* Typing cursor - solid while typing (only when focused) */
+.terminal-input input:focus + .cursor.typing {
+  animation: none;
+  opacity: 1;
+  box-shadow: 0 0 8px var(--accent-green);
+}
+
+/* Focused cursor - faster blink when terminal is active */
+.terminal-input input:focus + .cursor,
+.terminal.focused .cursor {
+  animation: fastBlink 0.8s infinite;
+  opacity: 1;
+}
+
+@keyframes fastBlink {
+  0%, 49% { 
+    opacity: 1; 
+    box-shadow: 0 0 8px var(--accent-green);
+  }
+  50%, 100% { 
+    opacity: 0; 
+    box-shadow: none;
+  }
+}
+
+/* Light mode cursor adjustments */
+:root.light-mode .terminal-input input:focus + .cursor {
+  background: #007acc; /* Blue cursor for light mode */
+  box-shadow: 0 0 3px #007acc;
+  opacity: 1;
+}
+
+:root.light-mode .terminal-input input:focus + .cursor.typing,
+:root.light-mode .terminal.focused .cursor {
+  box-shadow: 0 0 5px #007acc;
+  opacity: 1;
+}
+
+/* Retro terminal cursor with scanlines effect */
+.cursor.retro {
+  background: var(--accent-green);
+  position: relative;
+  overflow: hidden;
+}
+
+.cursor.retro::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 1px,
+    rgba(0, 0, 0, 0.2) 1px,
+    rgba(0, 0, 0, 0.2) 2px
+  );
+  pointer-events: none;
+}
+
+/* Smooth cursor movement */
+.cursor {
+  transition: transform 0.1s ease-out;
+}
+
+/* Cursor color variants for different states */
+.cursor.error {
+  background: var(--accent-pink);
+  animation: errorBlink 0.5s infinite;
+}
+
+@keyframes errorBlink {
+  0%, 49% { 
+    opacity: 1; 
+    box-shadow: 0 0 8px var(--accent-pink);
+  }
+  50%, 100% { 
+    opacity: 0.3; 
+    box-shadow: 0 0 3px var(--accent-pink);
+  }
+}
+
+.cursor.success {
+  background: var(--accent-green);
+  box-shadow: 0 0 10px var(--accent-green);
+  animation: successPulse 2s ease-in-out infinite;
+}
+
+@keyframes successPulse {
+  0%, 100% { 
+    opacity: 1; 
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.8; 
+    transform: scale(1.1);
+  }
+}
+
+/* Modern terminal cursor with smooth edges */
+.cursor.modern {
+  background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+  border-radius: 2px;
+  box-shadow: 
+    0 0 10px var(--accent-green),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Terminal input enhancements to work with cursor */
+.terminal-input {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.terminal-input input {
+  caret-color: transparent; /* Hide default caret */
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-family: 'Fira Code', monospace;
+  font-size: 1rem;
+  outline: none;
+  flex: 1;
+  margin-left: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Cursor positioning after prompt */
+.terminal-input .cursor {
+  position: absolute;
+  pointer-events: none;
+  width: 10px;
+  z-index: 2;
+  left: 0;
+  transform: translateX(0);
+}
 /*------------------------------LIGHT MODE-----------------------------*/
 /* Light Mode Colors and Shadows */
 :root.light-mode {
@@ -25,7 +219,8 @@
 }
 
 .culer{
-  padding-top: 60rem;
+  padding-top: 6rem;
+  background: var(--bg-secondary);
 }
 
 /*----------------------MAIN STYLE-----------------*/
@@ -269,6 +464,7 @@ body {
 .cursor {
   display: inline-block;
   background: var(--accent-green);
+  width: 10px;
   width: 2px;
   height: 1.2em;
   animation: blink 1s infinite;
@@ -765,5 +961,261 @@ body {
     
     .footer__social {
         justify-content: center;
+    }
+}
+
+
+
+/*---------------LOADING SCREEN-----------------------*/
+
+/* Loading Screen Styles - Add to your existing CSS */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.loading-overlay.hide {
+    opacity: 0;
+    transform: scale(0.8);
+    pointer-events: none;
+}
+
+.loading-terminal {
+    background: var(--bg-secondary, #161b22);
+    border: 2px solid var(--accent-green, #39ff14);
+    border-radius: 12px;
+    padding: clamp(1rem, 3vw, 2rem);
+    width: clamp(300px, 90vw, 800px);
+    max-width: 95vw;
+    box-shadow: 0 0 30px rgba(57, 255, 20, 0.3);
+    margin: 0 1rem;
+}
+
+.terminal-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(57, 255, 20, 0.3);
+}
+
+.terminal-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.terminal-dot:nth-child(1) { background: #ff5f56; }
+.terminal-dot:nth-child(2) { background: #ffbd2e; }
+.terminal-dot:nth-child(3) { background: var(--accent-green, #39ff14); }
+
+.terminal-title {
+    margin-left: 1rem;
+    color: var(--text-secondary, #8b949e);
+    font-size: 0.9rem;
+    font-family: 'Fira Code', monospace;
+}
+
+/* ASCII Art EMANN Styles */
+.ascii-art {
+    font-family: 'Fira Code', monospace;
+    font-size: clamp(0.4rem, 2vw, 0.8rem);
+    line-height: 1.1;
+    text-align: center;
+    margin: 2rem 0;
+    white-space: pre;
+    letter-spacing: 1px;
+    overflow-x: auto;
+    max-width: 100%;
+}
+
+.ascii-line {
+    display: block;
+    margin: 1px 0;
+    color: var(--accent-green, #39ff14);
+    text-shadow: 0 0 10px var(--accent-green, #39ff14);
+}
+
+.version-text {
+    font-family: 'Fira Code', monospace;
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    color: var(--accent-green, #39ff14);
+    text-shadow: 0 0 15px var(--accent-green, #39ff14);
+    text-align: center;
+    margin-top: 1rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+}
+
+.loading-content {
+    font-family: 'Fira Code', monospace;
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    line-height: 1.8;
+}
+
+.loading-text {
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.loading-text:nth-child(1) { animation-delay: 3s; }
+.loading-text:nth-child(2) { animation-delay: 4s; }
+.loading-text:nth-child(3) { animation-delay: 5s; }
+.loading-text:nth-child(4) { animation-delay: 6s; }
+.loading-text:nth-child(5) { animation-delay: 7s; }
+.loading-text:nth-child(6) { animation-delay: 8s; }
+
+.prompt { color: var(--accent-green, #39ff14); }
+.command { color: var(--accent-cyan, #00ffff); }
+.output { color: var(--text-primary, #f0f6fc); margin-left: 1rem; }
+.success { color: var(--accent-green, #39ff14); margin-left: 1rem; }
+
+.progress-container {
+    width: 100%;
+    height: 4px;
+    background: rgba(57, 255, 20, 0.2);
+    border-radius: 2px;
+    margin-top: 2rem;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #39ff14, #00ffff, #ff69b4);
+    border-radius: 2px;
+    width: 0%;
+    animation: loadProgress 10s linear forwards;
+    box-shadow: 0 0 10px #39ff14;
+}
+
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(57, 255, 20, 0.3);
+    border-radius: 50%;
+    border-top-color: #39ff14;
+    animation: spin 1s ease-in-out infinite;
+    margin-right: 0.5rem;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes loadProgress {
+    from { width: 0%; }
+    to { width: 100%; }
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+    .loading-terminal {
+        width: 95vw;
+        padding: 1rem;
+        margin: 0 0.5rem;
+    }
+    
+    .ascii-art {
+        font-size: clamp(0.3rem, 1.5vw, 0.5rem);
+        margin: 1rem 0;
+        letter-spacing: 0.5px;
+    }
+    
+    .version-text {
+        font-size: clamp(0.8rem, 4vw, 1.2rem);
+        letter-spacing: 2px;
+    }
+    
+    .terminal-header {
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+    }
+    
+    .terminal-title {
+        font-size: 0.8rem;
+        margin-left: 0.5rem;
+    }
+    
+    .loading-content {
+        font-size: clamp(0.7rem, 2.5vw, 0.9rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .loading-terminal {
+        width: 98vw;
+        padding: 0.8rem;
+        margin: 0 0.2rem;
+        border-radius: 8px;
+    }
+    
+    .ascii-art {
+        font-size: clamp(0.25rem, 1.2vw, 0.4rem);
+        letter-spacing: 0.2px;
+        line-height: 1.05;
+    }
+    
+    .version-text {
+        font-size: clamp(0.7rem, 3.5vw, 1rem);
+        letter-spacing: 1px;
+        margin-top: 0.5rem;
+    }
+    
+    .terminal-header {
+        flex-wrap: wrap;
+        gap: 0.3rem;
+    }
+    
+    .terminal-dot {
+        width: 10px;
+        height: 10px;
+    }
+    
+    .terminal-title {
+        font-size: 0.7rem;
+        margin-left: 0.3rem;
+    }
+    
+    .loading-content {
+        font-size: clamp(0.6rem, 2vw, 0.8rem);
+        line-height: 1.6;
+    }
+    
+    .progress-container {
+        height: 3px;
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 320px) {
+    .ascii-art {
+        font-size: 0.22rem;
+        letter-spacing: 0.1px;
+    }
+    
+    .version-text {
+        font-size: 0.8rem;
+        letter-spacing: 0.5px;
+    }
+    
+    .loading-terminal {
+        padding: 0.6rem;
     }
 }
