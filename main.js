@@ -1243,7 +1243,7 @@ Ready for commands...`
             }
         }, 1500);
 
-    }, 10000); // 10-second delay
+    }, 9000); // 10-second delay
 });
 
 
