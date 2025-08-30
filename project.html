@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #3498db;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #3498db;
+        }
+
+        /* Homepage Section */
+        .homepage {
+            margin-top: 80px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .slider-container {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 100%;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .slider-nav {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .slider-dot.active {
+            background: white;
+        }
+
+        .homepage-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .about-excerpt {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        .about-excerpt h2 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background: #2980b9;
+        }
+
+        .courses-section {
+            background: #ecf0f1;
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        .courses-section h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .calendar-preview {
+            margin: 2rem 0;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .testimonial img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 0;
+            background: #f8f9fa;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+        }
+
+        .about-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .about-card h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        /* References Section */
+        .references {
+            padding: 5rem 0;
+        }
+
+        .references-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .reference-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .reference-card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 5rem 0;
+            background: #f8f9fa;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .gallery-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .gallery-item-content {
+            padding: 1.5rem;
+        }
+
+        /* Documents Section */
+        .documents {
+            padding: 5rem 0;
+        }
+
+        .documents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .document-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .document-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .document-item i {
+            font-size: 3rem;
+            color: #3498db;
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 0;
+            background: #f8f9fa;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .form-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-secondary {
+            background: #95a5a6;
+        }
+
+        .btn-secondary:hover {
+            background: #7f8c8d;
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #3498db;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .homepage-content {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials {
+                grid-template-columns: 1fr;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .references-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-buttons {
+                flex-direction: column;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .slider-container {
+                height: 300px;
+            }
+
+            .slide {
+                font-size: 1.5rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animation classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <i class="fas fa-user-circle"></i> Your Logo
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#references">References</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#documents">Documents</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Homepage Section -->
+    <section id="home" class="homepage">
+        <div class="container">
+            <!-- Image Slider -->
+            <div class="slider-container">
+                <div class="slider" id="slider">
+                    <div class="slide" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://via.placeholder.com/800x400/3498db/ffffff?text=Welcome+to+My+Portfolio') center/cover;">
+                        <h2>Welcome to My Portfolio</h2>
+                    </div>
+                    <div class="slide" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://via.placeholder.com/800x400/e74c3c/ffffff?text=My+Journey') center/cover;">
+                        <h2>My Journey</h2>
+                    </div>
+                    <div class="slide" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://via.placeholder.com/800x400/2ecc71/ffffff?text=My+Achievements') center/cover;">
+                        <h2>My Achievements</h2>
+                    </div>
+                    <div class="slide" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://via.placeholder.com/800x400/f39c12/ffffff?text=Future+Goals') center/cover;">
+                        <h2>Future Goals</h2>
+                    </div>
+                </div>
+                <div class="slider-nav">
+                    <div class="slider-dot active" onclick="goToSlide(0)"></div>
+                    <div class="slider-dot" onclick="goToSlide(1)"></div>
+                    <div class="slider-dot" onclick="goToSlide(2)"></div>
+                    <div class="slider-dot" onclick="goToSlide(3)"></div>
+                </div>
+            </div>
+
+            <!-- Homepage Content -->
+            <div class="homepage-content">
+                <div class="about-excerpt">
+                    <h2>About Me</h2>
+                    <p>I am a passionate and dedicated individual with a strong background in technology and innovation. My journey has been filled with continuous learning and growth, always striving to make a positive impact in everything I do. With expertise in software development and a commitment to excellence, I bring creativity and technical skills to every project.</p>
+                    <br>
+                    <a href="#about" class="btn">Learn More About Me</a>
+                </div>
+
+                <div class="courses-section">
+                    <h3>Current Courses This Semester</h3>
+                    <img src="https://via.placeholder.com/300x150/34495e/ffffff?text=Current+Studies" alt="Course Image" style="width: 100%; border-radius: 5px; margin-bottom: 1rem;">
+                    <p><strong>Advanced Web Development</strong> - Learning modern frameworks and technologies including React, Node.js, and cloud deployment.</p>
+                    <p><strong>Data Science Fundamentals</strong> - Exploring data analysis, machine learning algorithms, and statistical modeling.</p>
+                    <p><strong>Digital Marketing Strategy</strong> - Understanding modern marketing approaches, SEO, and social media strategies.</p>
+                </div>
+            </div>
+
+            <!-- Calendar Preview -->
+            <div class="calendar-preview">
+                <h3><i class="fas fa-calendar-alt"></i> Upcoming Activities</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.5rem;"><strong>September 5:</strong> Final Project Presentation - Advanced Web Development</li>
+                    <li style="margin-bottom: 0.5rem;"><strong>September 12:</strong> Team Strategy Meeting - Marketing Campaign</li>
+                    <li style="margin-bottom: 0.5rem;"><strong>September 18:</strong> Data Science Workshop Attendance</li>
+                    <li style="margin-bottom: 0.5rem;"><strong>September 25:</strong> Guest Speaker at Tech Conference</li>
+                    <li><strong>October 2:</strong> Community Volunteer Coding Workshop</li>
+                </ul>
+            </div>
+
+            <!-- Testimonials -->
+            <div class="testimonials">
+                <div class="testimonial">
+                    <img src="https://via.placeholder.com/80x80/e74c3c/ffffff?text=JD" alt="John Doe">
+                    <h4>John Doe</h4>
+                    <p><em>Senior Software Engineer</em></p>
+                    <p>"An exceptional individual with outstanding leadership qualities and technical expertise. Always delivers beyond expectations and brings innovative solutions to complex problems."</p>
+                </div>
+                <div class="testimonial">
+                    <img src="https://via.placeholder.com/80x80/2ecc71/ffffff?text=JS" alt="Jane Smith">
+                    <h4>Jane Smith</h4>
+                    <p><em>Project Manager</em></p>
+                    <p>"Creative, innovative, and highly reliable. A pleasure to work with and someone who brings out the best in team members. Their dedication to quality is remarkable."</p>
+                </div>
+                <div class="testimonial">
+                    <img src="https://via.placeholder.com/80x80/f39c12/ffffff?text=MB" alt="Mike Brown">
+                    <h4>Mike Brown</h4>
+                    <p><em>Department Head</em></p>
+                    <p>"Demonstrates exceptional problem-solving skills and maintains a positive attitude even under pressure. A natural leader who inspires others. Highly recommended."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Me</h2>
+                <p>My journey, experiences, and aspirations</p>
+            </div>
+            
+            <div class="about-grid">
+                <div class="about-card">
+                    <h3><i class="fas fa-graduation-cap"></i> Educational Qualifications</h3>
+                    <p><strong>Bachelor of Science in Computer Science</strong><br>
+                    University of Technology (2020-2024)<br>
+                    GPA: 3.8/4.0<br>
+                    <em>Magna Cum Laude</em></p>
+                    
+                    <p><strong>High School Diploma</strong><br>
+                    Central High School (2016-2020)<br>
+                    Valedictorian, Honor Roll</p>
+                    
+                    <p><strong>Certifications:</strong><br>
+                    AWS Cloud Practitioner, Google Analytics Certified</p>
+                </div>
+
+                <div class="about-card">
+                    <h3><i class="fas fa-briefcase"></i> Work Experience</h3>
+                    <p><strong>Software Developer Intern</strong><br>
+                    Tech Solutions Inc. (June 2023 - Aug 2023)<br>
+                    Developed responsive web applications using React and Node.js. Collaborated with senior developers on client projects.</p>
+                    
+                    <p><strong>Teaching Assistant</strong><br>
+                    University of Technology (2022-2024)<br>
+                    Assisted in programming courses, mentored students, graded assignments and conducted lab sessions.</p>
+                    
+                    <p><strong>Freelance Web Developer</strong><br>
+                    (2021-Present)<br>
+                    Created websites for local businesses and non-profits.</p>
+                </div>
+
+                <div class="about-card">
+                    <h3><i class="fas fa-certificate"></i> Seminars & Workshops</h3>
+                    <p><strong>AI and Machine Learning Summit</strong><br>
+                    <em>Duration: 3 days</em><br>
+                    Advanced techniques in ML, Neural Networks - March 2024</p>
+                    
+                    <p><strong>Full-Stack Web Development Bootcamp</strong><br>
+                    <em>Duration: 5 days</em><br>
+                    Modern frameworks, MERN stack - January 2024</p>
+                    
+                    <p><strong>Leadership Excellence Workshop</strong><br>
+                    <em>Duration: 2 days</em><br>
+                    Team management, communication skills - November 2023</p>
+                    
+                    <p><strong>Cybersecurity Fundamentals</strong><br>
+                    <em>Duration: 4 days</em><br>
+                    Network security, ethical hacking - September 2023</p>
+                </div>
+
+                <div class="about-card">
+                    <h3><i class="fas fa-crown"></i> Leadership Positions</h3>
+                    <p><strong>Student Council President</strong><br>
+                    University of Technology (2023-2024)<br>
+                    Led student initiatives, organized campus events, represented student body in academic committees.</p>
+                    
+                    <p><strong>Tech Club Vice President</strong><br>
+                    University of Technology (2022-2023)<br>
+                    Organized coding competitions, tech talks, and hackathons. Mentored junior members.</p>
+                    
+                    <p><strong>Debate Team Captain</strong><br>
+                    High School (2018-2020)<br>
+                    Led team to state championships, organized tournaments.</p>
+                </div>
+
+                <div class="about-card">
+                    <h3><i class="fas fa-heart"></i> Community Service</h3>
+                    <p><strong>Code for Good Volunteer</strong><br>
+                    Teaching programming to underprivileged youth<br>
+                    80+ hours of service, 2022-Present</p>
+                    
+                    <p><strong>Environmental Clean-up Organizer</strong><br>
+                    Monthly community clean-up events<br>
+                    Organized 24 events, 2022-Present</p>
+                    
+                    <p><strong>Food Bank Volunteer</strong><br>
+                    Weekend food distribution assistance<br>
+                    60+ hours of service, 2021-Present</p>
+                    
+                    <p><strong>Literacy Program Tutor</strong><br>
+                    Adult education reading assistance<br>
+                    40+ hours of service, 2023-Present</p>
+                </div>
+
+                <div class="about-card">
+                    <h3><i class="fas fa-star"></i> Hobbies & Aspirations</h3>
+                    <p><strong>Hobbies:</strong><br>
+                    📸 Photography - Nature and portrait photography<br>
+                    🥾 Hiking - Weekend trail adventures<br>
+                    📚 Reading - Sci-fi novels and tech blogs<br>
+                    🎮 Gaming - Strategy and puzzle games<br>
+                    🍳 Cooking - Experimenting with international cuisines</p>
+                    
+                    <p><strong>Personal Aspirations:</strong><br>
+                    To become a leading software architect and contribute to innovative solutions that make a positive impact on society. I aim to mentor young developers, promote diversity in tech, and eventually start my own tech company focused on sustainable technology solutions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- References Section -->
+    <section id="references" class="references">
+        <div class="container">
+            <div class="section-title">
+                <h2>References</h2>
+                <p>Professional contacts who can speak to my character and abilities</p>
+            </div>
+            
+            <div class="references-grid">
+                <div class="reference-card">
+                    <img src="https://via.placeholder.com/120x120/3498db/ffffff?text=Prof.+A" alt="Prof. Anderson">
+                    <h3>Prof. Sarah Anderson</h3>
+                    <p><strong>Computer Science Department Head</strong></p>
+                    <p>University of Technology</p>
+                    <p><i class="fas fa-envelope"></i> s.anderson@university.edu</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-building"></i> Room 204, CS Building</p>
+                </div>
+
+                <div class="reference-card">
+                    <img src="https://via.placeholder.com/120x120/e74c3c/ffffff?text=Mr.+J" alt="Mr. Johnson">
+                    <h3>Mr. David Johnson</h3>
+                    <p><strong>Senior Software Engineer</strong></p>
+                    <p>Tech Solutions Inc.</p>
+                    <p><i class="fas fa-envelope"></i> d.johnson@techsolutions.com</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 987-6543</p>
+                    <p><i class="fab fa-linkedin"></i> linkedin.com/in/davidjohnson</p>
+                </div>
+
+                <div class="reference-card">
+                    <img src="https://via.placeholder.com/120x120/2ecc71/ffffff?text=Dr.+W" alt="Dr. Williams">
+                    <h3>Dr. Emily Williams</h3>
+                    <p><strong>Research Director</strong></p>
+                    <p>Innovation Labs</p>
+                    <p><i class="fas fa-envelope"></i> e.williams@innovationlabs.com</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 456-7890</p>
+                    <p><i class="fas fa-globe"></i> innovationlabs.com</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photo Gallery Section -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <div class="section-title">
+                <h2>Photo Gallery</h2>
+                <p>Moments from my journey with family, friends, and achievements</p>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/300x250/3498db/ffffff?text=Graduation+Day" alt="Graduation">
+                    <div class="gallery-item-content">
+                        <h4>Graduation Day</h4>
+                        <p>Celebrating my Computer Science degree with family and friends. A milestone moment that marked the beginning of my professional journey and the culmination of four years of hard work and dedication.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/300x250/e74c3c/ffffff?text=Family+Vacation" alt="Family Vacation">
+                    <div class="gallery-item-content">
+                        <h4>Family Beach Vacation</h4>
+                        <p>Quality time with family during our annual summer vacation to the coast. These moments remind me of the importance of work-life balance and staying connected with loved ones who support my dreams.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/300x250/2ecc71/ffffff?text=Team+Project" alt="Team Project">
+                    <div class="gallery-item-content">
+                        <h4>Team Project Success</h4>
+                        <p>Celebrating with my development team after successfully launching our e-commerce web application. This project taught me valuable lessons about collaboration, problem-solving, and meeting tight deadlines.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/300x250/f39c12/ffffff?text=Conference+Speaking" alt="Tech Conference">
+                    <div class="gallery-item-content">
+                        <h4>Tech Conference Speaker</h4>
+                        <p>Speaking at the Annual Tech Conference about emerging technologies and their impact on society. Sharing knowledge with the community is always rewarding and helps me grow as a professional.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/300x250/9b59b6/ffffff?text=Hiking+Adventure" alt="Hiking">
+                    <div class="gallery-item-content">
+                        <h4>Mountain Hiking Adventure</h4>
+                        <p>Exploring the beautiful mountain trails with close friends on a weekend hiking trip. These adventures in nature help me recharge, find inspiration, and maintain physical and mental well-being.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/300x250/1abc9c/ffffff?text=Volunteer+Teaching" alt="Volunteering">
+                    <div class="gallery-item-content">
+                        <h4>Community Volunteer Teaching</h4>
+                        <p>Teaching coding skills to local underprivileged youth through the "Code for Good" program. Giving back to the community and inspiring the next generation of developers brings me immense satisfaction.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/300x250/34495e/ffffff?text=Study+Sessions" alt="Study Group">
+                    <div class="gallery-item-content">
+                        <h4>Late Night Study Sessions</h4>
+                        <p>Collaborative learning with classmates during university years preparing for final exams. These intensive study sessions not only built lasting friendships but also taught me the value of teamwork in learning.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/300x250/e67e22/ffffff?text=Award+Ceremony" alt="Awards">
+                    <div class="gallery-item-content">
+                        <h4>Academic Excellence Award</h4>
+                        <p>Receiving the Dean's List recognition for academic achievements during my junior year. This moment represents years of hard work, dedication, and the support of amazing professors and mentors.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/300x250/8e44ad/ffffff?text=Friends+Gathering" alt="Friends">
+                    <div class="gallery-item-content">
+                        <h4>College Friends Reunion</h4>
+                        <p>Catching up with college friends over dinner at our favorite restaurant. These relationships continue to be a source of support, laughter, and shared memories that span our entire university experience.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/300x250/27ae60/ffffff?text=Leadership+Workshop" alt="Workshop">
+                    <div class="gallery-item-content">
+                        <h4>Leadership Development Workshop</h4>
+                        <p>Participating in professional development workshops focused on leadership skills and team management. Continuous learning and personal growth are essential for both career advancement and personal fulfillment.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documents Section -->
+    <section id="documents" class="documents">
+        <div class="container">
+            <div class="section-title">
+                <h2>Documents & Certificates</h2>
+                <p>Official documents and certifications available for download</p>
+            </div>
+            
+            <div class="documents-grid">
+                <div class="document-item">
+                    <i class="fas fa-file-pdf"></i>
+                    <h4>Resume/CV</h4>
+                    <p>Complete professional resume with all work experience, education, and skills details</p>
+                    <button class="btn" onclick="downloadDocument('resume')">Download PDF</button>
+                </div>
+
+                <div class="document-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h4>Degree Certificate</h4>
+                    <p>Bachelor's degree in Computer Science from University of Technology</p>
+                    <button class="btn" onclick="downloadDocument('degree')">Download PDF</button>
+                </div>
+
+                <div class="document-item">
+                    <i class="fas fa-certificate"></i>
+                    <h4>Professional Certifications</h4>
+                    <p>AWS Cloud Practitioner, Google Analytics, and other technical certificates</p>
+                    <button class="btn" onclick="downloadDocument('certifications')">Download PDF</button>
+                </div>
+
+                <div class="document-item">
+                    <i class="fas fa-award"></i>
+                    <h4>Achievement Awards</h4>
+                    <p>Academic excellence awards, leadership recognition, and honor roll certificates</p>
+                    <button class="btn" onclick="downloadDocument('awards')">Download PDF</button>
+                </div>
+
+                <div class="document-item">
+                    <i class="fas fa-file-alt"></i>
+                    <h4>Academic Transcripts</h4>
+                    <p>Official university transcripts showing course grades and GPA</p>
+                    <button class="btn" onclick="downloadDocument('transcripts')">Download PDF</button>
+                </div>
+
+                <div class="document-item">
+                    <i class="fas fa-handshake"></i>
+                    <h4>Letters of Recommendation</h4>
+                    <p>Professional recommendation letters from professors and supervisors</p>
+                    <button class="btn" onclick="downloadDocument('recommendations')">Download PDF</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Me</h2>
+                <p>Let's connect and discuss opportunities</p>
+            </div>
+            
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Subject *</label>
+                    <input type="text" id="subject" name="subject" placeholder="Enter the subject of your message" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message *</label>
+                    <textarea id="message" name="message" placeholder="Enter your message here..." required></textarea>
+                </div>
+
+                <div class="form-buttons">
+                    <button type="submit" class="btn">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                    <button type="reset" class="btn btn-secondary">
+                        <i class="fas fa-redo"></i> Reset Form
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">
+                    <i class="fas fa-user-circle"></i> Your Logo
+                </div>
+                <div class="social-links">
+                    <a href="https://facebook.com/yourprofile" title="Facebook" target="_blank">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="https://twitter.com/yourprofile" title="Twitter" target="_blank">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/yourprofile" title="LinkedIn" target="_blank">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://instagram.com/yourprofile" title="Instagram" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://github.com/yourprofile" title="GitHub" target="_blank">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://youtube.com/yourchannel" title="YouTube" target="_blank">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="https://tiktok.com/@yourprofile" title="TikTok" target="_blank">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="https://discord.gg/yourserver" title="Discord" target="_blank">
+                        <i class="fab fa-discord"></i>
+                    </a>
+                </div>
+            </div>
+            <div style="border-top: 1px solid #34495e; padding-top: 2rem; margin-top: 2rem;">
+                <p>&copy; 2025 Your Portfolio. All rights reserved.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8;">
+                    <i class="fas fa-envelope"></i> email@gmail.com | 
+                    <i class="fas fa-phone"></i> +1 (555) 123-4567 | 
+                    <i class="fas fa-map-marker-alt"></i> Your City, Your Country
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Slider functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.slider-dot');
+        const slider = document.getElementById('slider');
+
+        function goToSlide(n) {
+            currentSlide = n;
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            dots.forEach(dot => dot.classList.remove('active'));
+            dots[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            goToSlide(currentSlide);
+        }
+
+        // Auto-slide functionality - changes every 5 seconds
+        setInterval(nextSlide, 5000);
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Contact form handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const name = formData.get('name').trim();
+            const email = formData.get('email').trim();
+            const phone = formData.get('phone').trim();
+            const subject = formData.get('subject').trim();
+            const message = formData.get('message').trim();
+            
+            // Simple validation
+            if (!name || !email || !subject || !message) {
+                alert('Please fill in all required fields (marked with *).');
+                return;
+            }
+            
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+            
+            // Simulate form submission
+            alert(`Thank you, ${name}! Your message has been sent successfully. I'll get back to you within 24-48 hours.`);
+            this.reset();
+        });
+
+        // Document download functionality
+        function downloadDocument(docType) {
+            // In a real implementation, these would be actual file URLs
+            const documents = {
+                'resume': 'documents/resume.pdf',
+                'degree': 'documents/degree-certificate.pdf',
+                'certifications': 'documents/professional-certifications.pdf',
+                'awards': 'documents/achievement-awards.pdf',
+                'transcripts': 'documents/academic-transcripts.pdf',
+                'recommendations': 'documents/recommendation-letters.pdf'
+            };
+            
+            // Simulate download with more detailed feedback
+            const docName = docType.charAt(0).toUpperCase() + docType.slice(1).replace('-', ' ');
+            alert(`Downloading ${docName} document...\n\nNote: In a live website, this would download the actual PDF file.`);
+            
+            // In a real implementation, you would use:
+            // const link = document.createElement('a');
+            // link.href = documents[docType];
+            // link.download = `${docType}.pdf`;
+            // document.body.appendChild(link);
+            // link.click();
+            // document.body.removeChild(link);
+        }
+
+        // Add active nav link highlighting on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all major elements for scroll animations
+        document.querySelectorAll('.about-card, .reference-card, .gallery-item, .document-item, .testimonial').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+
+        // Initialize first section as visible
+        document.querySelector('#home').style.opacity = '1';
+        document.querySelector('#home').style.transform = 'translateY(0)';
+
+        // Add loading animation
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease-in';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+        // Mobile menu functionality (for future enhancement)
+        function createMobileMenu() {
+            const nav = document.querySelector('nav');
+            const mobileMenuBtn = document.createElement('div');
+            mobileMenuBtn.className = 'mobile-menu-btn';
+            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            mobileMenuBtn.style.display = 'none';
+            
+            // Add mobile styles
+            const style = document.createElement('style');
+            style.textContent = `
+                @media (max-width: 768px) {
+                    .mobile-menu-btn {
+                        display: block !important;
+                        font-size: 1.5rem;
+                        cursor: pointer;
+                        color: #2c3e50;
+                    }
+                    .nav-links.mobile-active {
+                        display: flex !important;
+                        flex-direction: column;
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        width: 100%;
+                        background: white;
+                        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                        padding: 1rem;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            nav.appendChild(mobileMenuBtn);
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                const navLinks = document.querySelector('.nav-links');
+                navLinks.classList.toggle('mobile-active');
+            });
+        }
+        
+        // Initialize mobile menu
+        createMobileMenu();
+
+        // Smooth scroll to top functionality
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 100) {
+                if (!document.querySelector('.scroll-top-btn')) {
+                    const scrollBtn = document.createElement('div');
+                    scrollBtn.className = 'scroll-top-btn';
+                    scrollBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+                    scrollBtn.style.cssText = `
+                        position: fixed;
+                        bottom: 30px;
+                        right: 30px;
+                        background: #3498db;
+                        color: white;
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        cursor: pointer;
+                        box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+                        transition: all 0.3s ease;
+                        z-index: 1000;
+                    `;
+                    
+                    scrollBtn.addEventListener('click', function() {
+                        window.scrollTo({
+                            top: 0,
+                            behavior: 'smooth'
+                        });
+                    });
+                    
+                    scrollBtn.addEventListener('mouseenter', function() {
+                        this.style.background = '#2980b9';
+                        this.style.transform = 'scale(1.1)';
+                    });
+                    
+                    scrollBtn.addEventListener('mouseleave', function() {
+                        this.style.background = '#3498db';
+                        this.style.transform = 'scale(1)';
+                    });
+                    
+                    document.body.appendChild(scrollBtn);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
